@@ -1,0 +1,285 @@
+/* --- CONFIGURAÇÕES GERAIS E CORES --- */
+:root {
+    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #2d3748;
+    --text-secondary: #718096;
+    --primary: #4a90e2;
+    --income: #66bb6a;
+    --expense: #ef5350;
+    --border-radius: 16px;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* DASHBOARD (CARDS DE SALDO) */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.card .value {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.card.balance .value {
+    color: var(--primary);
+}
+
+.card.incomes .value {
+    color: var(--income);
+}
+
+.card.expenses .value {
+    color: var(--expense);
+}
+
+/* LAYOUT DO FORMULÁRIO E HISTÓRICO */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* FORMULÁRIO */
+.form-section h2,
+.history-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+input,
+select {
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    background-color: #f8fafc;
+    transition: border 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary);
+    background-color: #fff;
+}
+
+button {
+    background-color: var(--text-main);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #1a202c;
+}
+
+/* LISTA DE TRANSAÇÕES */
+.history-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-list {
+    list-style: none;
+    max-height: 290px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar */
+.transaction-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.transaction-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.transaction-item {
+    background: white;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.item-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.item-category {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-top: 2px;
+}
+
+.item-value-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.item-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.item-value.plus {
+    color: var(--income);
+}
+
+.item-value.minus {
+    color: var(--expense);
+}
+
+.btn-delete {
+    background: none;
+    color: #a0aec0;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.btn-delete:hover {
+    color: var(--expense);
+}
+
+.empty-state {
+    color: var(--text-secondary);
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 30px;
+}
