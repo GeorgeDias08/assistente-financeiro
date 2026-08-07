@@ -1,6 +1,6 @@
 /* --- CONFIGURAÇÕES GERAIS E CORES --- */
 :root {
-    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --bg-gradient: linear-gradient(135deg, #e8e9eb 0%, #c3cfe2 100%);
     --card-bg: rgba(255, 255, 255, 0.85);
     --text-main: #2d3748;
     --text-secondary: #718096;

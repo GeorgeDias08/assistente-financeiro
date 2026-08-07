@@ -75,7 +75,7 @@ function renderList() {
 
         const itemTitle = document.createElement('span');
         itemTitle.classList.add('item-title');
-        itemTitle.textContent = t.description; 
+        itemTitle.textContent = t.description;
 
         const itemCategory = document.createElement('span');
         itemCategory.classList.add('item-category');
@@ -134,7 +134,7 @@ form.addEventListener('submit', (e) => {
     if (API_URL) {
         fetch(API_URL, {
             method: "POST",
-            mode: "no-cors", 
+            mode: "no-cors",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -146,7 +146,7 @@ form.addEventListener('submit', (e) => {
 
     // Limpa os campos do formulário corretamente
     descInput.value = '';
-    amountInput.value = ''; 
+    amountInput.value = '';
     descInput.focus();
 });
 
@@ -170,3 +170,13 @@ descInput.addEventListener('input', (e) => {
     // Substitui tudo o que NÃO for letra (A-Z) ou espaço por nada ""
     e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
 });
+
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js")
+        .then(() => {
+            console.log("PWA ativo!");
+        })
+        .catch(err => {
+            console.error("Erro:", err);
+        });
+}
