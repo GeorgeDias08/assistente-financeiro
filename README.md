@@ -6,7 +6,11 @@ O **Assistente Financeiro** é uma aplicação web moderna e responsiva voltada 
 
 ## 📷 Demonstração
 
-![Demonstração do Assistente Financeiro](assets/preview.png)
+### 🌐 Landing Page
+![Landing Page do Assistente Financeiro](assets/og-landing.png)
+
+### 📱 Painel do Aplicativo
+![Interface do App Financeiro](assets/preview.png)
 
 ---
 
