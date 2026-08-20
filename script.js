@@ -21,12 +21,12 @@ const expensesDisplay = document.getElementById('expenses-val');
 
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
-// Função para formatar moeda em Real (R$)
+// Função para formatar moeda em Real
 function formatCurrency(value) {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
-// Função para atualizar os valores do painel (Saldo, Entradas, Saídas)
+// Função para atualizar valores do painel
 function updateDashboard() {
     const amounts = transactions.map(t => t.type === 'income' ? t.amount : -t.amount);
 
@@ -51,7 +51,7 @@ function updateDashboard() {
     }
 }
 
-// SEGURANÇA: Função segura para renderizar a lista
+// Função segura para renderizar a lista
 function renderList() {
     listContainer.innerHTML = '';
 
@@ -105,7 +105,7 @@ function renderList() {
     });
 }
 
-// Evento de envio do formulário (Adicionar transação)
+// Evento de envio do formulário
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 

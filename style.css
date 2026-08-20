@@ -56,7 +56,6 @@ header p {
     font-size: 0.9rem;
 }
 
-/* DASHBOARD (CARDS DE SALDO) */
 .dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -102,7 +101,6 @@ header p {
     color: var(--expense);
 }
 
-/* LAYOUT DO FORMULÁRIO E HISTÓRICO */
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1.3fr;
@@ -115,7 +113,6 @@ header p {
     }
 }
 
-/* FORMULÁRIO */
 .form-section h2,
 .history-section h2 {
     font-size: 1.1rem;
@@ -175,7 +172,6 @@ button:hover {
     background-color: #1a202c;
 }
 
-/* LISTA DE TRANSAÇÕES */
 .history-section {
     display: flex;
     flex-direction: column;
@@ -188,7 +184,6 @@ button:hover {
     padding-right: 5px;
 }
 
-/* Custom Scrollbar */
 .transaction-list::-webkit-scrollbar {
     width: 6px;
 }

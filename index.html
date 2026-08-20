@@ -1,90 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <!-- Ícone que aparece na aba do navegador e no celular -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/assistente-financeiro-32x32.png">
     <link rel="apple-touch-icon" href="assets/assistente-financeiro-180x180.png">
-    <!-- Card com imagem que aparece ao mandar o link no WhatsApp, LinkedIn, etc -->
-    <meta property="og:title" content="Assistente Financeiro">
-    <meta property="og:description" content="Controle financeiro pessoal simples, rápido e direto no seu navegador.">
+    <meta property="og:title" content="Assistente Financeiro PWA">
+    <meta property="og:description" content="Organize suas finanças pessoais de forma prática, rápida e segura.">
     <meta property="og:image" content="https://assistente-financeiro-lilac.vercel.app/assets/preview.png">
     <meta property="og:url" content="https://assistente-financeiro-lilac.vercel.app">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#4CAF50">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="GkUTN2St-GQ0SVAC4OVZSXLPmSJ9Dm4AJnfqXykQ05I" />
-    <title>Assistente Financeiro Moderno</title>
+    <link rel="stylesheet" href="landing.css">
+    <title>Assistente Financeiro - Simplifique seu Controle</title>
 </head>
 
 <body>
-    <main class="container">
-        <header>
-            <h1>Finanças Pessoais</h1>
-            <p>Assistente financeiro</p>
-        </header>
-
-        <section class="dashboard">
-            <article class="card balance">
-                <h3>Saldo Atual</h3>
-                <output class="value" id="balance-val">R$ 0,00</output>
-            </article>
-
-            <article class="card incomes">
-                <h3>Entradas</h3>
-                <output class="value" id="incomes-val">R$ 0,00</output>
-            </article>
-
-            <article class="card expenses">
-                <h3>Saídas</h3>
-                <output class="value" id="expenses-val">R$ 0,00</output>
-            </article>
-        </section>
-
-        <div class="main-content">
-            <section class="form-section">
-                <h2>Nova Transação</h2>
-                <form id="finance-form">
-                    <p class="input-group">
-                        <label for="description">Descrição</label>
-                        <input type="text" id="description" placeholder="Ex: Salário, Aluguel"
-                            pattern="^[A-Za-zÀ-ÿ\s]+$"
-                            title="Apenas letras e espaços são permitidos. Remova números ou símbolos." required>
-                    </p>
-
-                    <p class="input-group">
-                        <label for="amount">Valor (R$)</label>
-                        <input type="number" id="amount" step="0.01" placeholder="0,00" required>
-                    </p>
-
-                    <p class="input-group">
-                        <label for="type">Tipo</label>
-                        <select id="type">
-                            <option value="income">Entrada (+)</option>
-                            <option value="expense">Saída (-)</option>
-                        </select>
-                    </p>
-
-                    <button type="submit">Adicionar</button>
-                </form>
-            </section>
-
-            <section class="history-section">
-                <h2>Histórico</h2>
-                <ul class="transaction-list" id="transaction-list">
-                </ul>
-                <p id="empty-msg" class="empty-state">Nenhuma transação cadastrada.</p>
-            </section>
-
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="./assets/assistente-financeiro-192x192.png" alt="Logo" width="32" height="32">
+                <span>Assistente Financeiro</span>
+            </div>
+            <div class="nav-links">
+                <a href="#recursos">Recursos</a>
+                <a href="#faq">Dúvidas</a>
+                <a href="app.html" class="btn-nav">Abrir App</a>
+            </div>
         </div>
-    </main>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <span class="badge">✨ Gratuito & Privado</span>
+                <h1>Assuma o controle total do seu dinheiro</h1>
+                <p>Um gerenciador financeiro simples, direto ao ponto e focado na sua privacidade. Acompanhe entradas,
+                    saídas e seu saldo em tempo real.</p>
+                <div class="hero-buttons">
+                    <a href="app.html" class="btn-primary">Acessar Aplicativo</a>
+                    <a href="#recursos" class="btn-secondary">Saber mais</a>
+                </div>
+            </div>
+            <div class="hero-mockup">
+                <img src="./assets/preview.png" alt="Demonstração do Assistente Financeiro">
+            </div>
+        </div>
+    </header>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Gratuito e sem anúncios</p>
+            </div>
+            <div class="stat-item">
+                <h3>0%</h3>
+                <p>Coleta de dados pessoais</p>
+            </div>
+            <div class="stat-item">
+                <h3>Offline</h3>
+                <p>Funciona em qualquer lugar</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="recursos">
+        <h2>Tudo o que você precisa em um só lugar</h2>
+        <p class="section-subtitle">Interface leve desenvolvida para economizar seu tempo.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">🚀</div>
+                <h3>100% Gratuito</h3>
+                <p>Acesse todas as funcionalidades sem mensalidades, assinaturas ou cobranças ocultas.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🔒</div>
+                <h3>Privacidade Garantida</h3>
+                <p>Seus dados ficam salvos de forma privada e encriptada no seu próprio navegador via LocalStorage.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">📱</div>
+                <h3>Instalável (PWA)</h3>
+                <p>Adicione diretamente na tela inicial do seu celular ou computador como um aplicativo nativo.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Funciona Offline</h3>
+                <p>Registre suas despesas e receitas em qualquer lugar, mesmo quando estiver sem sinal de internet.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-container">
+            <details>
+                <summary>Preciso criar uma conta para usar?</summary>
+                <p>Não! Você pode começar a usar imediatamente sem cadastrar e-mail, senha ou dados pessoais.</p>
+            </details>
+            <details>
+                <summary>Onde meus dados financeiros ficam salvos?</summary>
+                <p>Todas as suas transações são salvas no armazenamento local do seu próprio dispositivo (LocalStorage).
+                    Nenhum dado é enviado para servidores externos.</p>
+            </details>
+            <details>
+                <summary>Como instalar no celular?</summary>
+                <p>No Chrome ou Safari do seu celular, abra o menu de opções do navegador e clique em "Adicionar à tela
+                    inicial".</p>
+            </details>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="cta-container">
+            <h2>Pronto para organizar suas finanças?</h2>
+            <p>Comece a registrar suas contas agora mesmo. Leva menos de 1 minuto.</p>
+            <a href="app.html" class="btn-primary btn-large">Acessar o Assistente Agora</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>Desenvolvido por George Dias</p>
+            <div class="social-links">
+                <a href="https://github.com/GeorgeDias08" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
-<script src="config.js"></script>
-<script src="./script.js"></script>
 
 </html>

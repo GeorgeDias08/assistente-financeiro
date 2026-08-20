@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/assistente-financeiro-32x32.png">
+    <link rel="apple-touch-icon" href="assets/assistente-financeiro-180x180.png">
+    <meta property="og:title" content="Assistente Financeiro">
+    <meta property="og:description" content="Controle financeiro pessoal simples, rápido e direto no seu navegador.">
+    <meta property="og:image" content="https://assistente-financeiro-lilac.vercel.app/assets/preview.png">
+    <meta property="og:url" content="https://assistente-financeiro-lilac.vercel.app">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="GkUTN2St-GQ0SVAC4OVZSXLPmSJ9Dm4AJnfqXykQ05I" />
+    <title>Assistente Financeiro Moderno</title>
+</head>
+
+<body>
+    <main class="container">
+        <header>
+            <h1>Finanças Pessoais</h1>
+            <p>Assistente financeiro</p>
+        </header>
+
+        <section class="dashboard">
+            <article class="card balance">
+                <h3>Saldo Atual</h3>
+                <output class="value" id="balance-val">R$ 0,00</output>
+            </article>
+
+            <article class="card incomes">
+                <h3>Entradas</h3>
+                <output class="value" id="incomes-val">R$ 0,00</output>
+            </article>
+
+            <article class="card expenses">
+                <h3>Saídas</h3>
+                <output class="value" id="expenses-val">R$ 0,00</output>
+            </article>
+        </section>
+
+        <div class="main-content">
+            <section class="form-section">
+                <h2>Nova Transação</h2>
+                <form id="finance-form">
+                    <p class="input-group">
+                        <label for="description">Descrição</label>
+                        <input type="text" id="description" placeholder="Ex: Salário, Aluguel"
+                            pattern="^[A-Za-zÀ-ÿ\s]+$"
+                            title="Apenas letras e espaços são permitidos. Remova números ou símbolos." required>                                      
+                    </p>
+
+                    <p class="input-group">
+                        <label for="amount">Valor (R$)</label>
+                        <input type="number" id="amount" step="0.01" placeholder="0,00" required>
+                    </p>
+
+                    <p class="input-group">
+                        <label for="type">Tipo</label>
+                        <select id="type">
+                            <option value="income">Entrada (+)</option>
+                            <option value="expense">Saída (-)</option>
+                        </select>
+                    </p>
+
+                    <button type="submit">Adicionar</button>
+                </form>
+            </section>
+
+            <section class="history-section">
+                <h2>Histórico</h2>
+                <ul class="transaction-list" id="transaction-list">
+                </ul>
+                <p id="empty-msg" class="empty-state">Nenhuma transação cadastrada.</p>
+            </section>
+
+        </div>
+    </main>
+</body>
+<script src="config.js"></script>
+<script src="./script.js"></script>
+
+</html>
