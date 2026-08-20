@@ -1,22 +1,41 @@
-const cacheName = "assistente-financeiro-v1";
-
-const urlsToCache = [
-    "./",
-    "./index.html",
-    "./style.css",
-    "./script.js"
+const CACHE_NAME = 'financeiro-pwa-v2';
+const CACHE_URLS = [
+  './',
+  './index.html',
+  './app.html',
+  './landing.css',
+  './style.css',
+  './script.js'
 ];
 
-self.addEventListener("install", event => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(cacheName)
-      .then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(CACHE_URLS);
+    })
   );
+  self.skipWaiting();
 });
 
-self.addEventListener("fetch", event => {
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
   );
 });
