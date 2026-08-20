@@ -47,6 +47,8 @@ body {
   gap: 10px;
   font-weight: 700;
   font-size: 1.1rem;
+  text-decoration: none;
+  color: inherit;
 }
 
 .nav-links {
