@@ -1,6 +1,6 @@
 /* --- CONFIGURAÇÕES GERAIS E CORES --- */
 :root {
-    --bg-gradient: linear-gradient(135deg, #e8e9eb 0%, #c3cfe2 100%);
+    --bg-gradient: linear-gradient(135deg, #cbccce 0%, #c3cfe2 100%);
     --card-bg: rgba(255, 255, 255, 0.85);
     --text-main: #2d3748;
     --text-secondary: #718096;
@@ -23,11 +23,64 @@ body {
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
 }
 
+/* --- BARRA SUPERIOR (NAVBAR FIXA NO TOPO) --- */
+.top-navbar {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    margin-bottom: 25px;
+}
+
+.navbar-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.btn-icon-nav {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 8px;
+    color: #334155;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-icon-nav:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+/* --- CONTAINER PRINCIPAL DO APP --- */
 .container {
     width: 100%;
     max-width: 1100px;
@@ -38,6 +91,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: var(--shadow);
     padding: 30px;
+    margin-bottom: 30px;
 }
 
 header {
@@ -56,6 +110,7 @@ header p {
     font-size: 0.9rem;
 }
 
+/* --- CARDS E DASHBOARD --- */
 .dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -101,6 +156,7 @@ header p {
     color: var(--expense);
 }
 
+/* --- CONTEÚDO PRINCIPAL E FORMULÁRIO --- */
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1.3fr;
@@ -172,6 +228,7 @@ button:hover {
     background-color: #1a202c;
 }
 
+/* --- LISTA E HISTÓRICO --- */
 .history-section {
     display: flex;
     flex-direction: column;
@@ -210,7 +267,6 @@ button:hover {
         opacity: 0;
         transform: translateY(5px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -277,4 +333,99 @@ button:hover {
     text-align: center;
     font-size: 0.9rem;
     margin-top: 30px;
+}
+
+/* --- MENU LATERAL E OVERLAY --- */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 99;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s ease;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu.active {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-header h3 {
+    color: #1e293b;
+    margin: 0;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-size: 15px;
+    color: #1e293b;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu-item:hover {
+    background: #f1f5f9;
+    color: #2563eb;
+}
+
+.menu-item span {
+    color: inherit;
+}
+
+.btn-close-icon {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+    padding: 0;
+}
+
+.btn-close-icon:hover {
+    color: #0f172a;
 }

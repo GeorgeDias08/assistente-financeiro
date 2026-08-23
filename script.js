@@ -19,6 +19,11 @@ const balanceDisplay = document.getElementById('balance-val');
 const incomesDisplay = document.getElementById('incomes-val');
 const expensesDisplay = document.getElementById('expenses-val');
 
+const btnOpenMenu = document.getElementById('btn-open-menu');
+const btnCloseMenu = document.getElementById('btn-close-menu');
+const sidebarMenu = document.getElementById('sidebar-menu');
+const menuOverlay = document.getElementById('menu-overlay');
+
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
 // Função para formatar moeda em Real
@@ -105,12 +110,38 @@ function renderList() {
     });
 }
 
+// Máscara de digitação para o campo de valor
+amountInput?.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (!value) {
+        e.target.value = '';
+        return;
+    }
+
+    value = (parseFloat(value) / 100).toFixed(2);
+
+    e.target.value = new Intl.NumberFormat('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(value);
+});
+
+// Bloqueia a digitação de números e símbolos na descrição
+descInput?.addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
+});
+
 // Evento de envio do formulário
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const cleanDescription = descInput.value.trim();
-    const rawAmount = parseFloat(amountInput.value);
+
+    // Converte a string formatada "10.000,00" de volta para número puro "10000.00"
+    const rawValue = amountInput.value
+        .replace(/\./g, '')
+        .replace(',', '.');
+    const rawAmount = parseFloat(rawValue);
 
     const apenasLetras = /^[A-Za-zÀ-ÿ\s]+$/;
 
@@ -120,7 +151,7 @@ form.addEventListener('submit', (e) => {
     }
 
     const newTransaction = {
-        id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(), // Gera um ID único e seguro por transação
+        id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
         description: cleanDescription,
         amount: rawAmount,
         type: typeInput.value === 'income' ? 'income' : 'expense'
@@ -130,7 +161,6 @@ form.addEventListener('submit', (e) => {
 
     updateStorageAndUI();
 
-    // Envia os dados de forma assíncrona para a planilha e e-mail se a API_URL existir
     if (API_URL) {
         fetch(API_URL, {
             method: "POST",
@@ -144,7 +174,6 @@ form.addEventListener('submit', (e) => {
         console.warn("Aviso: Dados salvos localmente, mas não enviados para a nuvem porque a 'API_URL' não está configurada.");
     }
 
-    // Limpa os campos do formulário corretamente
     descInput.value = '';
     amountInput.value = '';
     descInput.focus();
@@ -161,16 +190,51 @@ function updateStorageAndUI() {
     updateDashboard();
 }
 
-// Inicializa o app ao carregar a página
-renderList();
-updateDashboard();
+// Exportar Transações para Arquivo CSV / Google Planilhas
+function exportarParaCSV() {
+    const transacoes = JSON.parse(localStorage.getItem('transactions')) || [];
 
-// Bloqueia a digitação de números e símbolos em tempo real
-descInput.addEventListener('input', (e) => {
-    // Substitui tudo o que NÃO for letra (A-Z) ou espaço por nada ""
-    e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ\s]/g, "");
-});
+    if (transacoes.length === 0) {
+        alert('Você não possui nenhuma transação cadastrada para exportar.');
+        return;
+    }
 
+    let csvContent = '\ufeffDescrição;Valor (R$);Tipo\n';
+
+    transacoes.forEach((t) => {
+        const valorFormatado = Number(t.amount).toFixed(2).replace('.', ',');
+        const tipoFormatado = t.type === 'income' ? 'Entrada' : 'Saída';
+        csvContent += `"${t.description}";"${valorFormatado}";"${tipoFormatado}"\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.setAttribute('href', url);
+    link.setAttribute('download', `financas_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+
+    link.click();
+    document.body.removeChild(link);
+
+    toggleMenu();
+}
+
+// Menu Lateral Controls
+function toggleMenu() {
+    sidebarMenu.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+}
+
+btnOpenMenu?.addEventListener('click', toggleMenu);
+btnCloseMenu?.addEventListener('click', toggleMenu);
+menuOverlay?.addEventListener('click', toggleMenu);
+
+const btnExportCSV = document.getElementById('btn-export-csv');
+btnExportCSV?.addEventListener('click', exportarParaCSV);
+
+// Service Worker Registration
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./service-worker.js")
         .then(() => {
@@ -180,3 +244,7 @@ if ("serviceWorker" in navigator) {
             console.error("Erro:", err);
         });
 }
+
+// Inicializa o app ao carregar a página
+renderList();
+updateDashboard();

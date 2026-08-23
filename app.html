@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-BR"> 
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +20,41 @@
 </head>
 
 <body>
+    <header class="top-navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <button id="btn-open-menu" class="btn-icon-nav" aria-label="Abrir Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1 class="nav-title">Assistente Financeiro</h1>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="menu-overlay"></div>
+    <aside id="sidebar-menu" class="sidebar-menu">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button id="btn-close-menu" class="btn-close-icon" aria-label="Fechar Menu">&times;</button>
+        </div>
+        <nav class="sidebar-nav">
+            <button id="btn-export-csv" class="menu-item">
+                <span>📊 Exportar para Planilha (.csv)</span>
+            </button>
+            <button id="btn-backup" class="menu-item">
+                <span>💾 Fazer Backup dos Dados</span>
+            </button>
+            <button id="btn-restore" class="menu-item">
+                <span>📂 Restaurar Backup</span>
+            </button>
+        </nav>
+    </aside>
+
     <main class="container">
         <header>
             <h1>Finanças Pessoais</h1>
@@ -50,12 +86,14 @@
                         <label for="description">Descrição</label>
                         <input type="text" id="description" placeholder="Ex: Salário, Aluguel"
                             pattern="^[A-Za-zÀ-ÿ\s]+$"
-                            title="Apenas letras e espaços são permitidos. Remova números ou símbolos." required>                                      
+                            title="Apenas letras e espaços são permitidos. Remova números ou símbolos." required>
                     </p>
 
                     <p class="input-group">
                         <label for="amount">Valor (R$)</label>
-                        <input type="number" id="amount" step="0.01" placeholder="0,00" required>
+                        <!-- <input type="number" id="amount" step="0.01" placeholder="0,00" required> -->
+                        <!-- <input type="text" id="amount" placeholder="0,00" inputmode="numeric"> -->
+                        <input type="text" id="amount" placeholder="0,00" inputmode="numeric" required>
                     </p>
 
                     <p class="input-group">
